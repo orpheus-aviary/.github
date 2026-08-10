@@ -9,9 +9,9 @@ orpheus-aviary 把「给人用的好工具」和「给 agent 用的好接口」�
 
 | 工具 | 是什么 | 状态 |
 |---|---|---|
-| 🦉 **[owl](https://github.com/orpheus-aviary/owl)** | AI 原生 Markdown 笔记 | 🚀 **0.5.0 已发**（macOS arm64） |
+| 🦉 **[owl](https://github.com/orpheus-aviary/owl)** | AI 原生 Markdown 笔记 | 🚀 **0.6.1 已发**（macOS arm64 + 网页版） |
 | 🌉 **[skybridge](https://github.com/orpheus-aviary/skybridge)** | local-first 多设备 / 多账号同步桥 | 📦 **npm 0.1.4**（三包公开发布） |
-| 🎵 **lark** | 音乐播放 / 下载 / 歌词工具 | 🔧 升级重构中（TS 重写） |
+| 🎵 **[lark](https://github.com/orpheus-aviary/lark)** | 音乐播放 / 下载 / 歌词工具 | 🚀 **0.1.0 已发**（macOS arm64） |
 | 🐦 **jay** | 终端 AI 助手（统一编排各工具） | ⏳ 规划中（TS 重写） |
 
 技术栈：Electron · Fastify · React + shadcn/ui · better-sqlite3 + drizzle · CodeMirror · pnpm monorepo。
@@ -43,13 +43,27 @@ orpheus-aviary 把「给人用的好工具」和「给 agent 用的好接口」�
 - **为多设备 / 多账号而生**：server_id 作工作区锚点、权威 server 时间做 LWW 归一化、refresh-token 轮换、设备吊销。
 - **可复用**：同一套 client / proto 给 owl、lark 复用，新工具接入成本低。
 
+## 🎵 lark —— 会自己找歌、自己配词的音乐播放器
+
+桌面音乐工具：粘一条链接或直接输歌名就能下载，歌词自动找、自动对齐，曲库和歌单都在本地。
+
+**突出优势**
+- **下载即入库**：bilibili 链接、收藏夹、合集，或者干脆只输一个歌名——LLM 负责把「歌名」变成「哪个视频」，
+  下载、转码、配歌词、写进曲库一条龙。
+- **歌曲链接体系**：每首歌记住自己的来源，文件丢了、换了设备，凭链接自动重下。
+- **统一缓存模型**：可以设上限、按最久未访问自动清理，但**只清理确定能重下的**——你自己导入的文件是资产，永不自动删。
+- **AI 可用**：`lark` CLI 全命令覆盖，`--json` 下「exit 0 ⇔ 一条成功信封」，另可一键导出 `skill.md` 给 agent。
+- **自带 ffmpeg**：安装包内含一份自建的 LGPL FFmpeg，下载转码开箱即用，不必先去配环境。
+
+> 下载（macOS arm64）：见 [Releases](https://github.com/orpheus-aviary/lark/releases) · CLI：`npm i -g @orpheus-aviary/lark-cli`
+
 ---
 
 ## 下一步开发计划
 
 - **📱 owl 移动端** —— 在桌面版之上扩展到移动设备，复用同一套 core 与 skybridge 同步。
-- **🎵 lark 升级重构** —— 以 TypeScript 重写、对齐 owl 技术栈（Electron + Fastify + React），
-  做音乐播放 / 下载 / 歌词，并接入 skybridge 同步歌单与播放记录。
+- **🎵 lark 多设备同步** —— 接入 skybridge，同步歌单与歌曲元数据（含来源链接）；
+  歌曲文件本身不同步，各设备凭来源按需重下。
 
 更远期：skybridge 多设备同步 GA → owl 1.0.0；jay 终端 AI 助手 TS 化，统一编排百鸟苑各工具。
 
