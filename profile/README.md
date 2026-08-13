@@ -11,7 +11,7 @@ orpheus-aviary 把「给人用的好工具」和「给 agent 用的好接口」�
 |---|---|---|
 | 🦉 **[owl](https://github.com/orpheus-aviary/owl)** | AI 原生 Markdown 笔记 | 🚀 **0.6.1 已发**（macOS arm64 + 网页版） |
 | 🌉 **[skybridge](https://github.com/orpheus-aviary/skybridge)** | local-first 多设备 / 多账号同步桥 | 📦 **npm 0.1.4**（三包公开发布） |
-| 🎵 **[lark](https://github.com/orpheus-aviary/lark)** | 音乐播放 / 下载 / 歌词工具 | 🚀 **0.1.0 已发**（macOS arm64） |
+| 🎵 **[lark](https://github.com/orpheus-aviary/lark)** | 音乐播放 / 下载 / 歌词工具 | 🚀 **0.2.0 已发**（macOS arm64，多设备同步） |
 | 🐦 **jay** | 终端 AI 助手（统一编排各工具） | ⏳ 规划中（TS 重写） |
 
 技术栈：Electron · Fastify · React + shadcn/ui · better-sqlite3 + drizzle · CodeMirror · pnpm monorepo。
@@ -54,6 +54,7 @@ orpheus-aviary 把「给人用的好工具」和「给 agent 用的好接口」�
 - **统一缓存模型**：可以设上限、按最久未访问自动清理，但**只清理确定能重下的**——你自己导入的文件是资产，永不自动删。
 - **AI 可用**：`lark` CLI 全命令覆盖，`--json` 下「exit 0 ⇔ 一条成功信封」，另可一键导出 `skill.md` 给 agent。
 - **自带 ffmpeg**：安装包内含一份自建的 LGPL FFmpeg，下载转码开箱即用，不必先去配环境。
+- **多设备同步**（0.2 起）：经 skybridge 同步曲库、歌单与歌词，**歌曲文件本身不同步**——各设备凭来源信息按需下载。冲突不猜不合并，摆出两边的值让你选。
 
 > 下载（macOS arm64）：见 [Releases](https://github.com/orpheus-aviary/lark/releases) · CLI：`npm i -g @orpheus-aviary/lark-cli`
 
@@ -62,10 +63,9 @@ orpheus-aviary 把「给人用的好工具」和「给 agent 用的好接口」�
 ## 下一步开发计划
 
 - **📱 owl 移动端** —— 在桌面版之上扩展到移动设备，复用同一套 core 与 skybridge 同步。
-- **🎵 lark 多设备同步** —— 接入 skybridge，同步歌单与歌曲元数据（含来源链接）；
-  歌曲文件本身不同步，各设备凭来源按需重下。
+- **🐦 jay 终端 AI 助手** —— TS 化，统一编排百鸟苑各工具。
 
-更远期：skybridge 多设备同步 GA → owl 1.0.0；jay 终端 AI 助手 TS 化，统一编排百鸟苑各工具。
+更远期：skybridge 多设备同步 GA → owl 1.0.0。
 
 ---
 
