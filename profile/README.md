@@ -11,7 +11,7 @@ orpheus-aviary 把「给人用的好工具」和「给 agent 用的好接口」�
 |---|---|---|
 | 🦉 **[owl](https://github.com/orpheus-aviary/owl)** | AI 原生 Markdown 笔记 | 🚀 **0.6.1 已发**（macOS arm64 + 网页版） |
 | 🌉 **[skybridge](https://github.com/orpheus-aviary/skybridge)** | local-first 多设备 / 多账号同步桥 | 📦 **npm 0.1.4**（三包公开发布） |
-| 🎵 **[lark](https://github.com/orpheus-aviary/lark)** | 音乐播放 / 下载 / 歌词工具 | 🚀 **0.2.0 已发**（macOS arm64，多设备同步） |
+| 🎵 **[lark](https://github.com/orpheus-aviary/lark)** | 音乐播放 / 下载 / 歌词工具 | 🚀 **0.3.0 已发**（macOS arm64，多设备同步） |
 | 🐦 **jay** | 终端 AI 助手（统一编排各工具） | ⏳ 规划中（TS 重写） |
 
 技术栈：Electron · Fastify · React + shadcn/ui · better-sqlite3 + drizzle · CodeMirror · pnpm monorepo。
@@ -49,11 +49,14 @@ orpheus-aviary 把「给人用的好工具」和「给 agent 用的好接口」�
 
 **突出优势**
 - **下载即入库**：bilibili 链接、收藏夹、合集，或者干脆只输一个歌名——LLM 负责把「歌名」变成「哪个视频」，
-  下载、转码、配歌词、写进曲库一条龙。
+  下载、配歌词、写进曲库一条龙；下载来的 AAC **原样重封装不再转码**，也可以让模型顺手把「【官方MV】…」
+  这样的标题读成歌名与歌手（0.3 起）。
 - **歌曲链接体系**：每首歌记住自己的来源，文件丢了、换了设备，凭链接自动重下。
 - **统一缓存模型**：可以设上限、按最久未访问自动清理，但**只清理确定能重下的**——你自己导入的文件是资产，永不自动删。
 - **AI 可用**：`lark` CLI 全命令覆盖，`--json` 下「exit 0 ⇔ 一条成功信封」，另可一键导出 `skill.md` 给 agent。
-- **自带 ffmpeg**：安装包内含一份自建的 LGPL FFmpeg，下载转码开箱即用，不必先去配环境。
+- **自带 ffmpeg**：安装包内含一份自建的 LGPL FFmpeg（零外部库），下载与导入开箱即用，不必先去配环境。
+- **导入按文件是什么收**（0.3 起）：m4a/mp4 · aac · mp3 · flac · wav · ogg/oga/opus 都收，不看扩展名看内容；
+  曲库只保留一种格式（m4a），导入即转换，无损源会告诉你副本损失了什么。
 - **多设备同步**（0.2 起）：经 skybridge 同步曲库、歌单与歌词，**歌曲文件本身不同步**——各设备凭来源信息按需下载。冲突不猜不合并，摆出两边的值让你选。
 
 > 下载（macOS arm64）：见 [Releases](https://github.com/orpheus-aviary/lark/releases) · CLI：`npm i -g @orpheus-aviary/lark-cli`
